@@ -1,0 +1,28 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        # just a dfs prob
+        # if we dont wanna keep track of var, we pass some total, multiple by 10 on the way up?
+        # one way is just find height of tree first
+        res = 0
+        def dfs(root, cur):
+            nonlocal res
+            if not root:
+                return 0
+            
+            cur = cur * 10 + root.val
+            if not root.left and not root.right:
+                res += cur
+            
+            dfs(root.left, cur)
+            dfs(root.right, cur)
+
+        dfs(root, 0)
+        return res
+            
+            
